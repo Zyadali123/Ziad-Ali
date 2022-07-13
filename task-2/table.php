@@ -64,11 +64,6 @@ $users = [
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>table</title>
-    <style>
-        table thead tr th {
-            text-transform: capitalize;
-        }
-    </style>
 </head>
 
 <body class="bg-dark">
@@ -79,8 +74,8 @@ $users = [
             <thead>
                 <tr>
                     <?php
-                    foreach ($users[0] as $property => $value) {
-                        echo "<th scope='col'>{$property}</th>";
+                    foreach ($users[1] as $type => $value) {
+                        echo "<th scope='col'>{$type}</th>";
                     }
                     ?>
                 </tr>
@@ -88,8 +83,7 @@ $users = [
             <tbody>
                 <?php
                 foreach ($users as $index => $user) {
-                    echo "<tr>";
-                    foreach ($user as $property => $value) {
+                    foreach ($user as $type => $value) {
                         if (gettype($value) != 'array' &&  gettype($value) != 'object') {
                             if ($value == $users[$index]->id) {
                                 echo "<th scope='row'>{$value}</th>";
@@ -98,7 +92,9 @@ $users = [
                             }
                         } elseif (gettype($value) == 'object' || gettype($value) == 'array') {
                             echo "<td scope='row'>";
+                            $count = 1;
                             foreach ($value as $key => $objectArrayValue) {
+                                
                                 if($key == 'gender')
                                 {
                                     if($objectArrayValue == 'm')
@@ -111,7 +107,8 @@ $users = [
                                     }
                                     
                                 }
-                                echo "{$objectArrayValue}";
+                                echo " {$count}. {$objectArrayValue} <br>";
+                                $count++;
                             }
                             echo "</td>";
                         } 
